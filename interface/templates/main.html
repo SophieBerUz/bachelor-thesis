@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Visual Stance Evolution and Exploration in Social Media</title>
+        <link rel="stylesheet" href="/static/css/index.css" />
+        <script src="https://d3js.org/d3.v7.min.js"></script>
+        <!-- partyvis.js -->
+        <script src="/static/js/partyvis.js"></script>
+        <script type="application/javascript"> myVar=my_Func(JSON.parse('{{ abortion | tojson }}'),JSON.parse('{{ climate | tojson }}'),JSON.parse('{{ feminism | tojson }}'))</script>
+    </head>
+    
+    <body>
+        <div id="header">
+            <h1>Visual Stance Evolution and Exploration in Social Media</h1>
+        </div>
+        <div class="container">
+            <div class="selection">
+                <!--Button for each party-->
+                <div class="divParties">
+                    <h3>Parties of the bundestag</h3>
+                    <input type="checkbox" class="checkboxparty" value="SPD" checked>
+                    <label style="color:red;" for="myCheckbox">SPD</label><br>
+                    <input type="checkbox" class="checkboxparty" value="CDU" checked>
+                    <label for="myCheckbox">CDU/CSU</label><br>
+                    <input type="checkbox" class="checkboxparty" value="Gruenen" checked>
+                    <label style="color:green;" for="myCheckbox">Die Grünen</label><br>
+                    <input type="checkbox" class="checkboxparty" value="FDP" checked>
+                    <label style="color:gold;" for="myCheckbox">FDP</label><br>
+                    <input type="checkbox" class="checkboxparty" value="AfD" checked>
+                    <label style="color:blue;" for="myCheckbox">AfD</label><br>
+                    <input type="checkbox" class="checkboxparty" value="DIELINKE" checked>
+                    <label style="color:pink;" for="myCheckbox">DIE LINKE</label>
+                </div>
+                <!--Button for each topic-->
+                <div class="divTopics">
+                    <h3>Topics</h3>
+                    <input type="checkbox" class="checkboxtopic" value="feminism" checked>
+                    <label for="myCheckbox">Feminist Movement</label><br>
+                    <input type="checkbox" class="checkboxtopic" value="climate" checked>
+                    <label for="myCheckbox">Climate change is a real concern</label><br>
+                    <input type="checkbox" class="checkboxtopic" value="abortion" checked>
+                    <label for="myCheckbox">Legalization of abortion</label>
+                </div>
+                <!--Legend for the lines-->
+                <div class="legend-place">
+                    <h3>Legend</h3>
+                </div>
+            </div>
+            <div class="partyline" id="partychart">B</div>
+            <div class="peopleline" id="peoplechart">C</div>
+            <div class="timeslider">D</div>
+            <div class="bubbletree">E</div>
+          </div>
+
+    </body>
+</html>
