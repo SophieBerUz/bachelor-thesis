@@ -25,16 +25,17 @@ var peoplesvg = d3.select("#peoplechart")
 .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
 
-function my_Func(abortion,climate,feminism){
+function my_Func(abortion){
+    console.log(abortion)
     //y-axis
     var y = d3.scaleLinear().domain([-1,1]).range([height,0]);
     partysvg.append("g").call(d3.axisLeft(y));
     peoplesvg.append("g").call(d3.axisLeft(y));
     //x_axis
-    var xExtent = d3.extent(climate, function(d){return d.created_at;});
-    var x = d3.scaleTime().domain(xExtent).range([0,width]);
-    partysvg.append("g").attr("transform", "translate(0," + height/2 + ")").call(d3.axisBottom(x));
-    peoplesvg.append("g").attr("transform", "translate(0," + height/2 + ")").call(d3.axisBottom(x));
+    // var xExtent = d3.extent(climate, function(d){return d.created_at;});
+    // var x = d3.scaleTime().domain(xExtent).range([0,width]);
+    // partysvg.append("g").attr("transform", "translate(0," + height/2 + ")").call(d3.axisBottom(x));
+    // peoplesvg.append("g").attr("transform", "translate(0," + height/2 + ")").call(d3.axisBottom(x));
     //x axis label
     partysvg.append("text").attr("text-anchor","end").attr("x",width).attr("y",height/2).text("Time");
     peoplesvg.append("text").attr("text-anchor","end").attr("x",width).attr("y",height/2).text("Time");
@@ -64,12 +65,12 @@ function my_Func(abortion,climate,feminism){
     });
 
     //sort datasets for line graph
-    var sorted_feminism=feminism.sort(function(a,b){
-        return new Date(a.created_at)-new Date (b.created_at);
-    });
-    var sorted_climate=climate.sort(function(a,b){
-        return new Date(a.created_at)-new Date (b.created_at);
-    });
+    // var sorted_feminism=feminism.sort(function(a,b){
+    //     return new Date(a.created_at)-new Date (b.created_at);
+    // });
+    // var sorted_climate=climate.sort(function(a,b){
+    //     return new Date(a.created_at)-new Date (b.created_at);
+    // });
     var sorted_abortion=abortion.sort(function(a,b){
         return new Date(a.created_at)-new Date (b.created_at);
     });
