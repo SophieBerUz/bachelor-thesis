@@ -10,11 +10,11 @@
         flex-basis: 10%; /* Adjust the value to make column A smaller */
       }
   
-      .partyline, .peopleline {
+      .partyline, .bubbletree {
         flex-basis: calc(90% / 2); /* Adjust the value to distribute remaining space evenly */
       }
   
-      .timeslider, .bubbletree {
+      .timeslider {
         flex-basis: calc(100% / 2); /* Make column D and E take up half the width of the container */
       }
   
@@ -22,3 +22,4 @@
         border: 1px solid;
         box-sizing: border-box;
       }
+/*time slider*/
