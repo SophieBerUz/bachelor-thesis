@@ -33,20 +33,30 @@
                 <!--Button for each topic-->
                 <div class="divTopics">
                     <h3>Topics</h3>
-                    <input type="radio" name="topic" value="Feminism" checked>
+                    <!--<input type="radio" name="topic" value="Feminism" checked>
                     <label for="myCheckbox">Feminist Movement</label><br>
                     <input type="radio" name="topic" value="Climate">
                     <label for="myCheckbox">Climate change is a real concern</label><br>
                     <input type="radio" name="topic" value="Abortion">
-                    <label for="myCheckbox">Legalization of abortion</label><br>
+                    <label for="myCheckbox">Legalization of abortion</label><br>-->
+                    <input type="checkbox" class="checkboxtopic" name="topic" value="Feminism" checked>
+                    <label for="myCheckbox">Feminist Movement &#x25B2;</label><br>
+                    <input type="checkbox" class="checkboxtopic" name="topic" value="Climate" checked>
+                    <label for="myCheckbox">Climate change is a real concern &#x25CF;</label><br>
+                    <input type="checkbox" class="checkboxtopic" name="topic" value="Abortion" checked>
+                    <label for="myCheckbox">Legalization of abortion &#x25A0;</label><br>
                 </div>
                 <!--button to toggle points-->
                 <div class="togglePoints">
                     <h3>Points</h3>
                     <button id="toggleButton">Toggle Points</button>
+                    <h3>Lines</h3>
+                    <button id="toggleLines">Toggle Lines</button>
+                    <h3>Lines tweets per week</h3>
+                    <button id="toggleLinesWeek">Toggle Lines</button>
                 </div>
                 <!--time selection-->
-                <div class="timeslider">
+                <!--<div class="timeslider">
                     <h3>Time</h3>
                     <label for="start">Start date:</label>
                     <input type="date" class="start" name="trip-start" value="2020-03-07" min="2020-03-07" max="2022-09-29">
@@ -54,7 +64,7 @@
                     <input type="date" class="end" name="trip-end" value="2022-09-29" min="2020-03-07" max="2022-09-29">
                     <label for="days">Number of Days:</label> <span id="days">935</span>
                     
-                </div>
+                </div>-->
             </div>
             <div class="partyline" id="partychart">
             </div>
@@ -64,6 +74,6 @@
           </div>
      <!-- partyvis.js -->
      <script src="/static/js/partyvis.js"></script>
-     <script type="application/javascript"> myVar=my_Func(JSON.parse('{{ abortion | tojson }}'),JSON.parse('{{ climate | tojson }}'),JSON.parse('{{ feminism | tojson }}'),JSON.parse('{{ data | tojson }}'))</script>     
+     <script type="application/javascript"> myVar=my_Func(JSON.parse('{{ abortion | tojson }}'),JSON.parse('{{ climate | tojson }}'),JSON.parse('{{ feminism | tojson }}'),JSON.parse('{{ data | tojson }}'),JSON.parse('{{ politicians | tojson }}'))</script>     
     </body>
 </html>

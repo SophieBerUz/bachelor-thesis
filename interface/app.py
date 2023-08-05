@@ -15,7 +15,9 @@ def home():
         climate = json.load(f)
     with open('static/data/hierarchy_bubbletree.json','r', encoding='utf-8') as f:
         data = json.load(f)
-    return render_template("main.html",abortion=abortion,climate=climate,feminism=feminism,data=data)
+    with open('static/data/politicians.json','r', encoding='utf-8') as f:
+        politicians = json.load(f)
+    return render_template("main.html",abortion=abortion,climate=climate,feminism=feminism,data=data,politicians=politicians)
 
 if __name__ == '__main__':
     app.run(debug=True)

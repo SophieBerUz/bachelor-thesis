@@ -1,3 +1,8 @@
+body {
+  font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+}
 #header {
     text-align: center;
 }
@@ -8,6 +13,8 @@
   
    .selection {
         flex-basis: 10%; /* Adjust the value to make column A smaller */
+        background-color: #fff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       }
   
       .partyline, .bubbletree {
@@ -22,4 +29,37 @@
         border: 1px solid;
         box-sizing: border-box;
       }
-/*time slider*/
+.togglePoints button,
+.toggleLines button {
+  padding: 5px 10px;
+  font-size: 14px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.togglePoints button:hover,
+  .toggleLines button:hover {
+    background-color: #45a049;
+  }
+
+/* Customize the checkbox appearance based on their values */
+input[type="checkbox"].checkboxparty[value="FDP"] {
+  accent-color: gold;
+}
+input[type="checkbox"].checkboxparty[value="AfD"] {
+  accent-color: blue;
+}
+input[type="checkbox"].checkboxparty[value="SPD"] {
+  accent-color: red;
+}
+input[type="checkbox"].checkboxparty[value="CDU"] {
+  accent-color: black;
+}
+input[type="checkbox"].checkboxparty[value="DIELINKE"] {
+  accent-color: pink;
+}
+input[type="checkbox"].checkboxparty[value="Gruenen"] {
+  accent-color: green;
+}
