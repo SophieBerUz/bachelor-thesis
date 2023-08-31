@@ -159,7 +159,7 @@ function my_Func(abortion,climate,feminism,data,politicians){
       party,
       data: Array.from(data, ([week, tweets]) => ({ week, count: tweets.length })),
     }));
-    //console.log(BinnedFeminism);
+    console.log(BinnedAbortion);
 
     //y-axis for tweets per week
     var y_week = d3.scaleLinear().domain([0,300]).range([height,0]);
@@ -200,91 +200,16 @@ function my_Func(abortion,climate,feminism,data,politicians){
       .attr("stroke", d => colorScale(d.party))
       .attr("stroke_width",2);
 
-    //path for each party from topic abortion
-
-    var grouped_abortion =d3.group(sorted_abortion, d => d.party);
-    var grouped_climate =d3.group(sorted_climate, d => d.party);
-    var grouped_feminism =d3.group(sorted_feminism, d => d.party);
+    //add legend
+    var legend = d3.select(".legend-place").append("svg").attr("height",150);
+    legend.append("path").attr("d",d3.line()([[10,20],[40,20]])).attr("fill","none").attr("stroke_width",1.5).style("stroke","black");
+    legend.append("text").text("feminist movement").attr("x",50).attr("y",20);
+    legend.append("path").attr("d",d3.line()([[10,40],[40,40]])).attr("fill","none").attr("stroke-width",1.5).style("stroke","black").style("stroke-dasharray",("3,3"));
+    legend.append("text").text("climate change is a real concern").attr("x",50).attr("y",40);
+    legend.append("path").attr("d",d3.line()([[10,60],[40,60]])).attr("fill","none").attr("stroke-width",1.5).style("stroke","black").style("stroke-dasharray",("5,5"));
+    legend.append("text").text("legalization of abortion").attr("x",50).attr("y",60);  
     
-    /*var Line=partysvg.selectAll(".line")
-    .data(grouped_feminism)
-    .enter()
-    .append("path")
-    .attr("class",function(d){if(d[0]==="DIE LINKE."){return "lineDIELINKE";}
-    else if(d[0]==="BÜ90/GR"){return "lineGruenen";}else if(d[0]==="CDU/CSU"){return "lineCDU";}else{return "line"+d[0];}})
-    .attr("d", d => line(d[1]))
-    .attr("stroke", d => colorScale(d[0]))
-    .attr("fill","none")
-    .attr("stroke_width",1.5);
-    //points for each party from topic abortion
-    var Points=partysvg.selectAll(".point")
-    .data(feminism)
-    .enter()
-    .append("circle")
-    .attr("class",function(d){if(d.party==="DIE LINKE."){return "pointDIELINKE";}
-    else if(d.party==="BÜ90/GR"){return "pointGruenen";}else if(d.party==="CDU/CSU"){return "pointCDU";}else{return "point"+d.party;}})
-    .attr("cx", d => x(d.created_at)) 
-    .attr("cy",function(d){
-        if(d.stance === "AGAINST"){return y(-d.probability);}
-        else if (d.stance === "NEUTRAL"){return y(0);}
-        else{return y(d.probability);}
-       } ) 
-    .attr("r", 5) // Set the radius of the points
-    .attr("fill", d => colorScale(d.party))
-    .on("mouseover", mouseover)
-    .on("mousemove", mousemove)
-    .on("mouseleave", mouseleave);*/
-    var abortionLine=partysvg.selectAll(".line")
-    .data(grouped_abortion)
-    .enter()
-    .append("path")
-    .attr("class",function(d){if(d[0]==="DIE LINKE."){return "lineAbortionDIELINKE";}
-    else if(d[0]==="BÜ90/GR"){return "lineAbortionGruenen";}else if(d[0]==="CDU/CSU"){return "lineAbortionCDU";}else{return "lineAbortion"+d[0];}})
-    .attr("d", d => line(d[1]))
-    .attr("stroke", d => colorScale(d[0]))
-    .attr("fill","none")
-    .attr("stroke_width",1.5).style("stroke-dasharray",("5,5"));
-    //path for each party from topic climate
-    var climateLine=partysvg.selectAll(".line")
-    .data(grouped_climate)
-    .enter()
-    .append("path")
-    .attr("class", function(d){if(d[0]==="DIE LINKE."){return "lineClimateDIELINKE";}
-    else if(d[0]==="BÜ90/GR"){return "lineClimateGruenen";}else if(d[0]==="CDU/CSU"){return "lineClimateCDU";}else{return "lineClimate"+d[0];}})
-    .attr("d", d => line(d[1]))
-    .attr("stroke", d => colorScale(d[0]))
-    .attr("fill","none")
-    .attr("stroke_width",1.5).style("stroke-dasharray",("3,3"));
-    //path for each party from topic feminism
-    var feminismLine=partysvg.selectAll(".line")
-    .data(grouped_feminism)
-    .enter()
-    .append("path")
-    .attr("class",function(d){if(d[0]==="DIE LINKE."){return "lineFeminismDIELINKE";}
-    else if(d[0]==="BÜ90/GR"){return "lineFeminismGruenen";}else if(d[0]==="CDU/CSU"){return "lineFeminismCDU";}else{return "lineFeminism"+d[0];}})
-    .attr("d", d => line(d[1]))
-    .attr("stroke", d => colorScale(d[0]))
-    .attr("fill","none")
-    .attr("stroke_width",1.5);
-    //points for each party from topic abortion
-    /*partysvg.selectAll(".point")
-    .data(abortion)
-    .enter()
-    .append("circle")
-    .attr("class",function(d){if(d.party==="DIE LINKE."){return "pointAbortionDIELINKE";}
-    else if(d.party==="BÜ90/GR"){return "pointAbortionGruenen";}else if(d.party==="CDU/CSU"){return "pointAbortionCDU";}else{return "pointAbortion"+d.party;}})
-    .attr("cx", d => x(d.created_at)) 
-    .attr("cy",function(d){
-        if(d.stance === "AGAINST"){return y(-d.probability);}
-        else if (d.stance === "NEUTRAL"){return y(0);}
-        else{return y(d.probability);}
-       } ) 
-    .attr("r", 5) // Set the radius of the points
-    .attr("fill", d => colorScale(d.party))
-    .on("mouseover", mouseover)
-    .on("mousemove", mousemove)
-    .on("mouseleave", mouseleave);*/
-    partysvg.selectAll(".point")
+  partysvg.selectAll(".point")
   .data(abortion)
   .enter()
   .append("rect")
@@ -375,11 +300,9 @@ function my_Func(abortion,climate,feminism,data,politicians){
 
     // Define a toggle state variable
 let toggleState = false;
-let toggleLi = false;
 let toggleLiWeek=false;
 // Add event listener to the button
 document.getElementById("toggleButton").addEventListener("click", togglePoints);
-document.getElementById("toggleLines").addEventListener("click", toggleLines);
 document.getElementById("toggleLinesWeek").addEventListener("click", toggleLinesWeek);
 // Event handler function
 function togglePoints() {
@@ -445,40 +368,6 @@ function toggleTopic(parti,sym,selection,state){
   });
 
 }
-//function toggle lines
-function toggleLines(){
-  // Toggle the state
-  toggleLi = !toggleLi;
-
-  // Select all points and update their visibility based on the toggle state
-  partysvg.selectAll(".lineAbortionSPD").style("display", toggleLi ? "none" : "initial");
-  partysvg.selectAll(".lineAbortionAfD").style("display", toggleLi ? "none" : "initial");
-  partysvg.selectAll(".lineAbortionFDP").style("display", toggleLi ? "none" : "initial"); 
-  partysvg.selectAll(".lineAbortionDIELINKE").style("display", toggleLi ? "none" : "initial");
-  partysvg.selectAll(".lineAbortionGruenen").style("display", toggleLi ? "none" : "initial"); 
-  partysvg.selectAll(".lineAbortionCDU").style("display", toggleLi ? "none" : "initial");
-
-  partysvg.selectAll(".lineClimateSPD").style("display", toggleLi ? "none" : "initial");
-  partysvg.selectAll(".lineClimateAfD").style("display", toggleLi ? "none" : "initial");
-  partysvg.selectAll(".lineClimateFDP").style("display", toggleLi ? "none" : "initial"); 
-  partysvg.selectAll(".lineClimateDIELINKE").style("display", toggleLi ? "none" : "initial");
-  partysvg.selectAll(".lineClimateGruenen").style("display", toggleLi ? "none" : "initial"); 
-  partysvg.selectAll(".lineClimateCDU").style("display", toggleLi ? "none" : "initial");
-
-  partysvg.selectAll(".lineFeminismSPD").style("display", toggleLi ? "none" : "initial");
-  partysvg.selectAll(".lineFeminismAfD").style("display", toggleLi ? "none" : "initial");
-  partysvg.selectAll(".lineFeminismFDP").style("display", toggleLi ? "none" : "initial"); 
-  partysvg.selectAll(".lineFeminismDIELINKE").style("display", toggleLi ? "none" : "initial");
-  partysvg.selectAll(".lineFeminismGruenen").style("display", toggleLi ? "none" : "initial"); 
-  partysvg.selectAll(".lineFeminismCDU").style("display", toggleLi ? "none" : "initial");
-  //check selected parties
-  d3.selectAll(".checkboxparty").each(function(d){
-    cb = d3.select(this);
-    grp = cb.property("value");
-    select = cb.property("checked");
-    toggleTopic(grp,".line",select,toggleState);
-  });
-}
 //function toggle lines tweets per week
 function toggleLinesWeek(){
   // Toggle the state
@@ -523,7 +412,7 @@ function updateTopic(){
     if(select){
       selectedTopic.push(grp);
     }
-
+  
     if(selectedTopic.length===3){
       x.domain(xExtent);
       XaxisParty.transition().call(d3.axisBottom(x));
@@ -532,14 +421,18 @@ function updateTopic(){
       y_weekParty.transition().call(d3.axisRight(y_week));
     }
     else if(selectedTopic.includes("Feminism")&&selectedTopic.includes("Abortion")){
-      x.domain(d3.extent(dates_feminism));
+      const dates=dates_abortion.concat(dates_feminism);
+      const dateOb=dates.map((dateString)=>new Date(dateString));
+      x.domain(d3.extent(dateOb));
       XaxisParty.transition().call(d3.axisBottom(x));
       //y axis for tweets per week
       y_week.domain([0,100]);
       y_weekParty.transition().call(d3.axisRight(y_week));
     }
     else if(selectedTopic.includes("Feminism")&&selectedTopic.includes("Climate")){
-      x.domain(d3.extent(dates_feminism));
+      const dates=dates_feminism.concat(dates_climate);
+      const dateOb=dates.map((dateString)=>new Date(dateString));
+      x.domain(d3.extent(dateOb));
       XaxisParty.transition().call(d3.axisBottom(x));
       //y axis for tweets per week
       y_week.domain([0,300]);
@@ -569,7 +462,7 @@ function updateTopic(){
         y_week.domain([0,100]);
         y_weekParty.transition().call(d3.axisRight(y_week));
       }
-      else{
+      else if(selectedTopic.includes("Climate")){
         x.domain(d3.extent(dates_climate));
         XaxisParty.transition().call(d3.axisBottom(x));
         //y axis for tweets per week
@@ -585,13 +478,6 @@ function updateTopic(){
     }
 
     if(cb.property("checked")){
-      //lines
-      partysvg.selectAll(".line"+grp+"SPD").attr("d", d => line(d[1])).style("display","initial");
-      partysvg.selectAll(".line"+grp+"CDU").attr("d", d => line(d[1])).style("display","initial");
-      partysvg.selectAll(".line"+grp+"Gruenen").attr("d", d => line(d[1])).style("display","initial");
-      partysvg.selectAll(".line"+grp+"DIELINKE").attr("d", d => line(d[1])).style("display","initial");
-      partysvg.selectAll(".line"+grp+"AfD").attr("d", d => line(d[1])).style("display","initial");
-      partysvg.selectAll(".line"+grp+"FDP").attr("d", d => line(d[1])).style("display","initial");
       //lines tweets per week
       partysvg.selectAll(".lineWeek"+grp+"SPD").attr("d", d => line_week(d.data)).style("display","initial");
       partysvg.selectAll(".lineweek"+grp+"CDU").attr("d", d => line_week(d.data)).style("display","initial");
@@ -658,13 +544,6 @@ function updateTopic(){
       partysvg.selectAll(".points"+grp+"Bubble").style("display","initial");
     }
     else{
-      //line
-      partysvg.selectAll(".line"+grp+"SPD").style("display","none");
-      partysvg.selectAll(".line"+grp+"CDU").style("display","none");
-      partysvg.selectAll(".line"+grp+"DIELINKE").style("display","none");
-      partysvg.selectAll(".line"+grp+"AfD").style("display","none");
-      partysvg.selectAll(".line"+grp+"Gruenen").style("display","none");
-      partysvg.selectAll(".line"+grp+"FDP").style("display","none");
       //lines tweets per week
       partysvg.selectAll(".lineWeek"+grp+"SPD").style("display","none");
       partysvg.selectAll(".lineweek"+grp+"CDU").style("display","none");
@@ -707,28 +586,6 @@ function updateTopic(){
     partysvg.selectAll(".pointFeminismCDU").style("display", "none");
 
   }
-  if(toggleLi){
-    partysvg.selectAll(".lineAbortionSPD").style("display", "none");
-    partysvg.selectAll(".lineAbortionAfD").style("display", "none");
-    partysvg.selectAll(".lineAbortionFDP").style("display", "none"); 
-    partysvg.selectAll(".lineAbortionDIELINKE").style("display", "none");
-    partysvg.selectAll(".lineAbortionGruenen").style("display", "none"); 
-    partysvg.selectAll(".lineAbortionCDU").style("display", "none");
-
-    partysvg.selectAll(".lineClimateSPD").style("display", "none");
-    partysvg.selectAll(".lineClimateAfD").style("display", "none");
-    partysvg.selectAll(".lineClimateFDP").style("display", "none"); 
-    partysvg.selectAll(".lineClimateDIELINKE").style("display","none");
-    partysvg.selectAll(".lineClimateGruenen").style("display","none"); 
-    partysvg.selectAll(".lineClimateCDU").style("display","none");
-
-    partysvg.selectAll(".lineFeminismSPD").style("display",  "none");
-    partysvg.selectAll(".lineFeminismAfD").style("display","none");
-    partysvg.selectAll(".lineFeminismFDP").style("display","none"); 
-    partysvg.selectAll(".lineFeminismDIELINKE").style("display","none");
-    partysvg.selectAll(".lineFeminismGruenen").style("display","none"); 
-    partysvg.selectAll(".lineFeminismCDU").style("display", "none");
-  }
   if(toggleLiWeek){
     partysvg.selectAll(".lineWeekAbortionSPD").style("display", "none");
     partysvg.selectAll(".lineWeekAbortionAfD").style("display", "none");
@@ -758,16 +615,12 @@ function doubleCheckParty(topic,select){
     cb = d3.select(this);
     grp = cb.property("value");
     if(cb.property("checked")&&select){
-      //line
-      partysvg.selectAll(".line"+topic+grp).style("display","initial");
       //lines tweets per week
       partysvg.selectAll(".lineWeek"+topic+grp).style("display","initial");
       //point
       partysvg.selectAll(".point"+topic+grp).style("display","initial");
     }
     else{
-      //line
-      partysvg.selectAll(".line"+topic+grp).style("display","none");
       //lines tweets per week
       partysvg.selectAll(".lineWeek"+topic+grp).style("display","none");
       //point
@@ -783,10 +636,6 @@ function updateParty(){
       select = cb.property("checked");
 
       if(cb.property("checked")){
-        //line
-          partysvg.selectAll(".line"+"Feminism"+grp).style("display","initial");
-          partysvg.selectAll(".line"+"Climate"+grp).style("display","initial");
-          partysvg.selectAll(".line"+"Abortion"+grp).style("display","initial");
         //lines tweets per week
           partysvg.selectAll(".lineWeek"+"Feminism"+grp).style("display","initial");
           partysvg.selectAll(".lineWeek"+"Climate"+grp).style("display","initial");
@@ -795,12 +644,10 @@ function updateParty(){
           partysvg.selectAll(".point"+"Feminism"+grp).style("display","initial");
           partysvg.selectAll(".point"+"Climate"+grp).style("display","initial");
           partysvg.selectAll(".point"+"Abortion"+grp).style("display","initial");
+        //opacity of bubble
+        bubbletree.selectAll(".Bubble"+grp).style("fill-opacity",1);
       }
       else{
-        //line
-        partysvg.selectAll(".line"+"Feminism"+grp).style("display","none");
-        partysvg.selectAll(".line"+"Climate"+grp).style("display","none");
-        partysvg.selectAll(".line"+"Abortion"+grp).style("display","none");
         //lines tweets per week
         partysvg.selectAll(".lineWeek"+"Feminism"+grp).style("display","none");
         partysvg.selectAll(".lineweek"+"Climate"+grp).style("display","none");
@@ -809,6 +656,8 @@ function updateParty(){
         partysvg.selectAll(".point"+"Feminism"+grp).style("display","none");
         partysvg.selectAll(".point"+"Climate"+grp).style("display","none");
         partysvg.selectAll(".point"+"Abortion"+grp).style("display","none");
+        //opacity bubble
+        bubbletree.selectAll(".Bubble"+grp).style("fill-opacity",0.3);
       }
       doubleCheckTopic(grp,select);
   });
@@ -834,28 +683,6 @@ function updateParty(){
     partysvg.selectAll(".pointFeminismGruenen").style("display", "none" ); 
     partysvg.selectAll(".pointFeminismCDU").style("display", "none");
 
-  }
-  if(toggleLi){
-    partysvg.selectAll(".lineAbortionSPD").style("display", "none");
-    partysvg.selectAll(".lineAbortionAfD").style("display", "none");
-    partysvg.selectAll(".lineAbortionFDP").style("display", "none"); 
-    partysvg.selectAll(".lineAbortionDIELINKE").style("display", "none");
-    partysvg.selectAll(".lineAbortionGruenen").style("display", "none"); 
-    partysvg.selectAll(".lineAbortionCDU").style("display", "none");
-
-    partysvg.selectAll(".lineClimateSPD").style("display", "none");
-    partysvg.selectAll(".lineClimateAfD").style("display", "none");
-    partysvg.selectAll(".lineClimateFDP").style("display", "none"); 
-    partysvg.selectAll(".lineClimateDIELINKE").style("display","none");
-    partysvg.selectAll(".lineClimateGruenen").style("display","none"); 
-    partysvg.selectAll(".lineClimateCDU").style("display","none");
-
-    partysvg.selectAll(".lineFeminismSPD").style("display",  "none");
-    partysvg.selectAll(".lineFeminismAfD").style("display","none");
-    partysvg.selectAll(".lineFeminismFDP").style("display","none"); 
-    partysvg.selectAll(".lineFeminismDIELINKE").style("display","none");
-    partysvg.selectAll(".lineFeminismGruenen").style("display","none"); 
-    partysvg.selectAll(".lineFeminismCDU").style("display", "none");
   }
   if(toggleLiWeek){
     partysvg.selectAll(".lineWeekAbortionSPD").style("display", "none");
@@ -886,16 +713,12 @@ function doubleCheckTopic(name,select){
       grp = cb.property("value");
 
       if(cb.property("checked")&&select){
-        //line
-          partysvg.selectAll(".line"+grp+name).style("display","initial");
         //lines tweets per week
           partysvg.selectAll(".lineweek"+grp+name).style("display","initial");
           //point
           partysvg.selectAll(".point"+grp+name).style("display","initial");
       }
       else{
-        //line
-          partysvg.selectAll(".line"+grp+name).style("display","none");
         //lines tweets per week
           partysvg.selectAll(".lineWeek"+grp+name).style("display","none");
           //point
@@ -1201,11 +1024,29 @@ const root = d3.hierarchy(data)
 const nodes=pack(root);
 let focus = nodes;
 let view;
-
+function getClass(parti){
+  switch (parti){
+    case 'AfD':
+      return 'BubbleAfD';
+    case 'Gruenen':
+      return 'BubbleGruenen';
+    case 'CDU':
+      return 'BubbleCDU';
+    case 'FDP':
+      return 'BubbleFDP';
+    case 'SPD':
+      return 'BubbleSPD';
+    case 'DIELINKE':
+      return 'BubbleDIELINKE';
+    default:
+      return '';//No class name for bubbles with politicians or tweets 
+  }
+};
 const bubbles = bubbletree.selectAll('circle')
   .data(nodes.descendants().slice(1))
   .enter()
   .append('circle')
+  .attr("class",(d)=>getClass(d.data.name))
   .attr('r', d => d.r)
   .attr('cx', d => d.x)
   .attr('cy', d => d.y)
@@ -1457,13 +1298,6 @@ function updateVisualizationPeople(){
     .on("mouseleave", mouseleaveBubble);  
     
 }
-//brushing
-/*partysvg
-      .call( d3.brush()                     // Add the brush feature using the d3.brush function
-        .extent( [ [30,30], [400,400] ] )       // initialise the brush area: start at 0,0 and finishes at width,height: it means I select the whole graph area
-      )*/
-  
-  
 
   
 
